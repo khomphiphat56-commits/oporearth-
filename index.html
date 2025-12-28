@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Anniversary 💜</title>
+
+<style>
+:root{
+  --purple1:#f4efff;
+  --purple2:#e8ddff;
+  --purple3:#d6c6ff;
+  --accent:#8f6bff;
+  --text-dark:#5b4b8a;
+  --text-soft:#7c6fa8;
+}
+
+*{
+  box-sizing:border-box;
+  font-family: "Segoe UI", system-ui, sans-serif;
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+  background:linear-gradient(135deg,var(--purple1),var(--purple2),var(--purple3));
+  overflow:hidden;
+}
+
+/* ---------- เอฟเฟกพื้นหลัง ---------- */
+.background{
+  position:fixed;
+  inset:0;
+  z-index:1;
+  pointer-events:none;
+}
+
+.floating-item{
+  position:absolute;
+  bottom:-60px;
+  font-size:18px;
+  opacity:.6;
+  animation:floatUp linear forwards;
+}
+
+@keyframes floatUp{
+  from{
+    transform:translateY(0) scale(.9);
+    opacity:0;
+  }
+  10%{opacity:.6}
+  to{
+    transform:translateY(-120vh) scale(1.1);
+    opacity:0;
+  }
+}
+
+/* ---------- กล่องหลัก ---------- */
+.wrapper{
+  position:relative;
+  z-index:5;
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+}
+
+.card{
+  width:100%;
+  max-width:440px;
+  background:rgba(255,255,255,.7);
+  backdrop-filter:blur(14px);
+  border-radius:30px;
+  padding:36px 26px;
+  text-align:center;
+  box-shadow:
+    0 30px 60px rgba(140,110,200,.25),
+    inset 0 1px 0 rgba(255,255,255,.5);
+  animation:cardEnter 1s ease;
+}
+
+@keyframes cardEnter{
+  from{
+    opacity:0;
+    transform:translateY(40px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+/* ---------- รูปหลัก ---------- */
+.main-image{
+  width:170px;
+  height:170px;
+  margin:0 auto;
+  border-radius:50%;
+  overflow:hidden;
+  border:6px solid rgba(255,255,255,.8);
+  box-shadow:0 15px 35px rgba(140,110,200,.35);
+}
+
+.main-image img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+/* ---------- ข้อความ ---------- */
+h1{
+  margin:22px 0 8px;
+  font-size:26px;
+  color:var(--text-dark);
+  letter-spacing:.5px;
+}
+
+.subtitle{
+  font-size:14px;
+  color:var(--text-soft);
+  margin-bottom:18px;
+}
+
+.message{
+  font-size:15px;
+  line-height:1.8;
+  color:#6a5f8f;
+  padding:0 6px;
+}
+
+/* ---------- เส้นหัวใจ ---------- */
+.divider{
+  margin:22px auto;
+  width:80px;
+  height:2px;
+  background:linear-gradient(90deg,transparent,var(--accent),transparent);
+  position:relative;
+}
+
+.divider::after{
+  content:"💜";
+  position:absolute;
+  top:-12px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:16px;
+}
+
+/* ---------- ปรับสำหรับแท็บเล็ต ---------- */
+@media (min-width:768px){
+  .card{
+    max-width:500px;
+    padding:44px 34px;
+  }
+  h1{font-size:28px}
+}
+</style>
+</head>
+
+<body>
+
+<div class="background" id="bg"></div>
+
+<div class="wrapper">
+  <div class="card">
+
+    <!-- รูปคู่ตรงกลาง -->
+    <div class="main-image">
+      <img src="main.jpg" alt="Our Photo">
+    </div>
+
+    <!-- ข้อความ (แก้เองได้) -->
+    <h1>Happy Anniversary 💜</h1>
+    <div class="subtitle">อีกหนึ่งปีที่มีความหมาย</div>
+
+    <div class="divider"></div>
+
+    <div class="message">
+      ขอบคุณทุกช่วงเวลาที่เราได้เดินมาด้วยกัน  
+      ไม่ว่าทางจะง่ายหรือยาก  
+      แค่มีเธออยู่ข้างๆ  
+      ทุกวันก็ยังคงเป็นวันที่ดีเสมอ
+      <br><br>
+      และหวังว่าเราจะยังได้จับมือกันแบบนี้  
+      ต่อไปอีกนานแสนนาน
+    </div>
+
+  </div>
+</div>
+
+<script>
+const bg = document.getElementById("bg");
+const symbols = ["💜","💖","💗","✨","🤍","🌸"];
+
+function createFloating(){
+  const el = document.createElement("div");
+  el.className = "floating-item";
+  el.textContent = symbols[Math.floor(Math.random()*symbols.length)];
+  el.style.left = Math.random()*100 + "vw";
+  el.style.fontSize = (14 + Math.random()*18) + "px";
+  el.style.animationDuration = (8 + Math.random()*8) + "s";
+  bg.appendChild(el);
+
+  setTimeout(()=>el.remove(),16000);
+}
+
+setInterval(createFloating, 600);
+</script>
+
+</body>
+</html>
